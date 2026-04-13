@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hikaru Shiozawa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+
+    <div id="experience">
+        <canvas id="experience-canvas"></canvas>
+    </div>
+
+    <div id="ui">
+        <a href="#" class="name-link">
+            <span>Hikaru</span>
+            <span>Shiozawa</span>
+        </a>
+    </div>
+
+    <video id="monitor-video" src="./Monitor_Screen_Vid.mp4" loop muted autoplay playsinline style="display:none"></video>
+
+    <script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@v0.149.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.149.0/examples/jsm/"
+  }
+}
+    </script>
+    <script type="module" src="./main.js"></script>
+
+</body>
+
+</html>
