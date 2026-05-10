@@ -1,6 +1,6 @@
 document.body.insertAdjacentHTML('beforeend', `
     <nav class="nav-panel" id="nav-panel">
-        <a href="./index.html" class="home-link"><img src="./home.png" alt="Home" /></a>
+        <a href="./index.html" class="home-link"><img src="./Blender/01_Assets/Web_Assets/home.png" alt="Home" /></a>
         <ul>
             <li><a href="./reel.html" data-text="Reel">Reel</a></li>
             <li><a href="./design.html" data-text="Design">Design</a></li>

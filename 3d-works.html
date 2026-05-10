@@ -26,26 +26,28 @@
     </header>
 
     <div class="works-content">
-        <div class="works-image-container">
-            <img id="works-main-image" src="" alt="" />
-            <button class="nav-arrow prev-arrow" id="prev-btn">
+        <div class="works-image-area">
+            <button class="nav-arrow" id="prev-btn" aria-label="Previous">
                 <svg width="64" height="45" viewBox="0 0 64 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M64 22.5L0 0V45L64 22.5Z" fill="#F0FBFF"/>
+                    <polygon points="64,0 64,45 0,22.5" fill="#F0FBFF" opacity="0.4"/>
                 </svg>
             </button>
-            <button class="nav-arrow next-arrow" id="next-btn">
+            <div class="works-image-container">
+                <img id="works-image" class="works-image" src="" alt="">
+            </div>
+            <button class="nav-arrow" id="next-btn" aria-label="Next">
                 <svg width="64" height="45" viewBox="0 0 64 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M0 22.5L64 0V45L0 22.5Z" fill="#F0FBFF"/>
+                    <polygon points="0,0 0,45 64,22.5" fill="#F0FBFF" opacity="0.4"/>
                 </svg>
             </button>
         </div>
 
-        <div class="works-info">
-            <div class="works-type" id="works-type"></div>
-            <h2 class="works-title" id="works-title"></h2>
-            <p class="works-description" id="works-description"></p>
-            <div class="works-meta" id="works-meta"></div>
-            <div class="works-icons" id="works-icons"></div>
+        <div class="works-desc-area">
+            <p id="works-type" class="works-type"></p>
+            <h2 id="works-title" class="works-title"></h2>
+            <p id="works-desc" class="works-description"></p>
+            <p id="works-meta" class="works-meta"></p>
+            <div id="works-icons" class="works-icons"></div>
         </div>
     </div>
 
@@ -54,9 +56,9 @@
         {
             image: '',
             type: '3D',
-            title: 'Work Title',
-            description: 'Description of the work goes here.',
-            meta: '2024',
+            title: 'Title',
+            description: 'Description here.',
+            meta: '1 day / Solo',
             icons: []
         }
     ];

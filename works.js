@@ -4,14 +4,14 @@
 
     let current = 0;
 
-    const mainImg  = document.getElementById('works-main-image');
-    const typeEl   = document.getElementById('works-type');
-    const titleEl  = document.getElementById('works-title');
-    const descEl   = document.getElementById('works-description');
-    const metaEl   = document.getElementById('works-meta');
-    const iconsEl  = document.getElementById('works-icons');
-    const prevBtn  = document.getElementById('prev-btn');
-    const nextBtn  = document.getElementById('next-btn');
+    const mainImg   = document.getElementById('works-image');
+    const typeEl    = document.getElementById('works-type');
+    const titleEl   = document.getElementById('works-title');
+    const descEl    = document.getElementById('works-desc');
+    const metaEl    = document.getElementById('works-meta');
+    const iconsEl   = document.getElementById('works-icons');
+    const prevBtn   = document.getElementById('prev-btn');
+    const nextBtn   = document.getElementById('next-btn');
     const videoLink = document.getElementById('watch-video');
 
     function render(index) {

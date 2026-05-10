@@ -189,46 +189,44 @@ body {
 }
 
 /* ── Image side ── */
-.works-image-container {
-    position: relative;
-    width: 463px;
-    height: 558px;
+.works-image-area {
+    display: flex;
+    align-items: center;
+    gap: 16px;
     flex-shrink: 0;
 }
 
-.works-image-container img#works-main-image {
+.works-image-container {
+    width: 463px;
+    height: 558px;
+}
+
+.works-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
 .nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
-    opacity: 0.4;
-    transition: opacity 0.2s;
     line-height: 0;
+    flex-shrink: 0;
 }
 
-.nav-arrow:hover {
+.nav-arrow svg {
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+
+.nav-arrow:hover svg {
     opacity: 0.8;
 }
 
-.prev-arrow {
-    left: -80px;
-}
-
-.next-arrow {
-    right: -80px;
-}
-
 /* ── Info side ── */
-.works-info {
+.works-desc-area {
     flex: 1;
     display: flex;
     flex-direction: column;
