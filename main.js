@@ -22,7 +22,7 @@ renderer.shadowMap.enabled = true;
 renderer.toneMapping = THREE.ReinhardToneMapping;
 renderer.toneMappingExposure = 3;
 
-let intersectObject
+let intersectObject;
 const intersectObjects = [];
 const intersectObjectsNames = [
     "scene",
@@ -42,6 +42,7 @@ let birdMesh = null;
 let mixer = null;
 
 let swingGroup = null;
+let monitorGroup = null;
 let controllerGroup = null;
 let monitorScreenMesh = null;
 let controllerOriginalY = 0;
@@ -56,6 +57,24 @@ const hoverAnim = {
     controller: { active: false, time: 0, lastPlayed: -10 }
 };
 
+const categoryLabelEl = document.getElementById('category-label');
+const categoryMap = { '01_Frame': 'Design', '02_Monitor': 'Motion', '03_Controller': '3D' };
+let labelDelayTimer = null;
+
+const fadeOverlay = document.getElementById('fade-overlay');
+let isTransitioning = false;
+const zoomPoint = new THREE.Vector3(0, 5, 0);
+
+function startTransition(url) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    controls.enabled = false;
+    setTimeout(() => {
+        fadeOverlay.style.transition = 'opacity 0.7s ease';
+        fadeOverlay.style.opacity = '1';
+    }, 500);
+    setTimeout(() => { window.location.href = url; }, 1300);
+}
 
 
 //mp4
@@ -63,10 +82,8 @@ const video = document.getElementById('monitor-video');
 video.play().catch(e => console.warn('Autoplay blocked:', e));
 const videoTexture = new THREE.VideoTexture(video);
 videoTexture.colorSpace = THREE.SRGBColorSpace;
-//videoTexture.rotation = Math.PI / 2;  // Rotation
-//videoTexture.center.set(0.5, 0.5);
-videoTexture.repeat.set(-3, 2.15);        // scale
-videoTexture.offset.set(0.935, -1.155);        // offset
+videoTexture.repeat.set(-3, 2.15);
+videoTexture.offset.set(0.935, -1.155);
 
 
 const loader = new GLTFLoader();
@@ -84,42 +101,32 @@ loader.load("./Portfolio_3DLevel_1.5.glb", function (glb) {
         if (child.name === 'Bike') bikeMesh = child;
         if (child.name === 'Bird') birdMesh = child;
 
-
         if (child.name === 'Cube013_1') {
             monitorScreenMesh = child;
-            child.material.color.set(0x000000);        // black base — so "off" = pure black
-            child.material.map = null;                  // remove diffuse video
-            child.material.emissiveMap = videoTexture;  // video only through emissive channel
+            child.material.color.set(0x000000);
+            child.material.map = null;
+            child.material.emissiveMap = videoTexture;
             child.material.emissive.set(0xffffff);
             child.material.emissiveIntensity = 1.5;
             child.material.needsUpdate = true;
         }
 
-
         if (child.name === '01_Frame' && !child.isMesh) swingGroup = child;
+        if (child.name === '02_Monitor' && !child.isMesh) monitorGroup = child;
         if (child.name === '03_Controller' && !child.isMesh) controllerGroup = child;
-        if (child.name === 'Cube013_1') monitorScreenMesh = child;
-
-
-
-        //console.log (child.texture);
     });
     scene.add(glb.scene);
 
-    //Store controller's original Y
     if (controllerGroup) {
         controllerOriginalY = controllerGroup.position.y;
         controllerOriginalRotZ = controllerGroup.rotation.z;
     }
 
-    //Bike wheels animation
     if (glb.animations && glb.animations.length > 0) {
         mixer = new THREE.AnimationMixer(glb.scene);
         glb.animations.forEach((clip) => {
             mixer.clipAction(clip).play();
         });
-
-
     }
 
 }, undefined, function (error) {
@@ -140,8 +147,6 @@ sun.shadow.camera.bottom = -50;
 sun.shadow.normalBias = 0.5;
 scene.add(sun);
 
-//const helper = new THREE.DirectionalLightHelper( sun, 5 );
-//scene.add( helper );
 const light = new THREE.AmbientLight(0xffffff, 1);
 scene.add(light);
 const Hemispherelight = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
@@ -150,9 +155,9 @@ scene.add(Hemispherelight);
 const horizonGeo = new THREE.PlaneGeometry(2000, 2000);
 const horizonMat = new THREE.MeshLambertMaterial({ color: 0x1B3870 });
 const horizonPlane = new THREE.Mesh(horizonGeo, horizonMat);
-horizonPlane.rotation.x = -Math.PI / 2;       // lay flat
-horizonPlane.position.y = -3.2;               // Height of the plane
-horizonPlane.renderOrder = -1;                // render behind everything
+horizonPlane.rotation.x = -Math.PI / 2;
+horizonPlane.position.y = -3.2;
+horizonPlane.renderOrder = -1;
 horizonPlane.receiveShadow = true;
 scene.add(horizonPlane);
 
@@ -167,13 +172,39 @@ camera.position.set(-23, 2, -0.6);
 
 const controls = new OrbitControls(camera, canvas);
 controls.target.set(0, 3, 0);
-controls.maxPolarAngle = Math.PI / 2 + 0.15; //Angle limitation
+controls.maxPolarAngle = Math.PI / 2 + 0.15;
 controls.minPolarAngle = Math.PI / 3;
-controls.minDistance = 15;  // Distance limitation
+controls.minDistance = 15;
 controls.maxDistance = 23.5;
 
 controls.update();
 
+
+// ── Burger menu ──
+const burgerBtn = document.getElementById('burger-btn');
+const navPanel = document.getElementById('nav-panel');
+const closeBtn = document.getElementById('close-btn');
+
+function openNav() {
+    navPanel.classList.add('open');
+    closeBtn.classList.add('open');
+}
+
+function closeNav() {
+    navPanel.classList.remove('open');
+    closeBtn.classList.remove('open');
+}
+
+burgerBtn.addEventListener('click', openNav);
+closeBtn.addEventListener('click', closeNav);
+document.addEventListener('click', (e) => {
+    if (navPanel.classList.contains('open')
+        && !navPanel.contains(e.target)
+        && !burgerBtn.contains(e.target)
+        && !closeBtn.contains(e.target)) {
+        closeNav();
+    }
+});
 
 
 function onResize() {
@@ -181,12 +212,13 @@ function onResize() {
     sizes.height = window.innerHeight;
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
-
     renderer.setSize(sizes.width, sizes.height);
 }
 
 function onClick() {
-    console.log(intersectObject);
+    if (intersectObject === '01_Frame')      startTransition('./design-works.html');
+    if (intersectObject === '02_Monitor')    startTransition('./motion-works.html');
+    if (intersectObject === '03_Controller') startTransition('./3d-works.html');
 }
 
 function onPointerMove(event) {
@@ -249,6 +281,18 @@ function animate() {
             hoverAnim.controller.lastPlayed = now;
         }
 
+        // Category label with 3-second delay
+        clearTimeout(labelDelayTimer);
+        const label = categoryMap[intersectObject] || '';
+        if (label && categoryLabelEl) {
+            labelDelayTimer = setTimeout(() => {
+                categoryLabelEl.textContent = label;
+                categoryLabelEl.classList.add('visible');
+            }, 3000);
+        } else if (categoryLabelEl) {
+            categoryLabelEl.classList.remove('visible');
+        }
+
         previousHoverObject = intersectObject;
     }
 
@@ -271,32 +315,30 @@ function animate() {
         const t = hoverAnim.monitor.time;
 
         if (t < .5) {
-            // Every 0.2s alternates: black → normal → black → normal
             const phase = Math.floor(t / 0.1) % 2;
             if (phase === 0) {
-                monitorScreenMesh.material.emissive.set(0xffffff); // white flash
-                monitorScreenMesh.material.emissiveIntensity = 10;  // boost for bright white
+                monitorScreenMesh.material.emissive.set(0xffffff);
+                monitorScreenMesh.material.emissiveIntensity = 10;
             } else {
                 monitorScreenMesh.material.emissive.set(0xffffff);
-                monitorScreenMesh.material.emissiveIntensity = 1.5;  // normal video
+                monitorScreenMesh.material.emissiveIntensity = 1.5;
             }
         } else {
             monitorScreenMesh.material.emissive.set(0xffffff);
             monitorScreenMesh.material.emissiveIntensity = 1.5;
             hoverAnim.monitor.active = false;
         }
-
     }
 
 
     // Controller: jump arc with scale, 0.8 seconds
     if (hoverAnim.controller.active && controllerGroup) {
         hoverAnim.controller.time += delta;
-        const t = hoverAnim.controller.time / 0.8; // normalised 0→1
+        const t = hoverAnim.controller.time / 0.8;
         if (t < 1) {
-            const arc = Math.sin(t * Math.PI);      // smooth 0→1→0 arc
+            const arc = Math.sin(t * Math.PI);
             controllerGroup.position.y = controllerOriginalY + arc * 2.5;
-            controllerGroup.rotation.z -= .001; // spin during jump
+            controllerGroup.rotation.z -= .001;
             controllerGroup.scale.setScalar(1 + arc * 0.35);
         } else {
             controllerGroup.position.y = controllerOriginalY;
@@ -308,11 +350,11 @@ function animate() {
 
 
     // Bike orbits at ground level
-    bikeAngle += 0.004; // speed — increase for faster
+    bikeAngle += 0.004;
     if (bikeMesh) {
-        bikeMesh.position.x = Math.cos(bikeAngle) * 12; // orbit radius
-        bikeMesh.position.z = Math.sin(bikeAngle) * 12;  // orbit radius
-        bikeMesh.rotation.y = -bikeAngle + Math.PI; // face direction of travel
+        bikeMesh.position.x = Math.cos(bikeAngle) * 12;
+        bikeMesh.position.z = Math.sin(bikeAngle) * 12;
+        bikeMesh.rotation.y = -bikeAngle + Math.PI;
     }
 
     // Bird orbits higher and faster
@@ -320,15 +362,18 @@ function animate() {
     if (birdMesh) {
         birdMesh.position.x = Math.cos(birdAngle) * 14;
         birdMesh.position.z = Math.sin(birdAngle) * 14;
-        // leave birdMesh.position.y as-is to keep original height
         birdMesh.rotation.y = -birdAngle;
     }
 
+    // Camera zoom on transition
+    if (isTransitioning) {
+        camera.position.lerp(zoomPoint, 0.03);
+        camera.lookAt(0, 3, 0);
+    }
 
     if (mixer) mixer.update(delta);
 
     renderer.render(scene, camera);
-    //console.log (camera.position);
 }
 
 renderer.setAnimationLoop(animate);

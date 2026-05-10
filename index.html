@@ -18,11 +18,36 @@
     </div>
 
     <div id="ui">
-        <a href="#" class="name-link">
+        <a href="./profile.html" class="name-link">
             <span>Hikaru</span>
             <span>Shiozawa</span>
         </a>
+        <div id="category-label" class="category-label"></div>
+        <div class="social-links">
+            <a href="#" target="_blank" rel="noopener"><img src="./artstation.png" alt="ArtStation" /></a>
+            <a href="#" target="_blank" rel="noopener"><img src="./linkedin.png" alt="LinkedIn" /></a>
+        </div>
+        <button class="burger-btn" id="burger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
+
+    <nav class="nav-panel" id="nav-panel">
+        <a href="./index.html" class="home-link"><img src="./home.png" alt="Home" /></a>
+        <ul>
+            <li><a href="./reel.html" data-text="Reel">Reel</a></li>
+            <li><a href="./design.html" data-text="Design">Design</a></li>
+            <li><a href="./motion.html" data-text="Motion">Motion</a></li>
+            <li><a href="./3d.html" data-text="3D">3D</a></li>
+            <li><a href="./profile.html" data-text="Profile">Profile</a></li>
+            <li><a href="./contact.html" data-text="Contact">Contact</a></li>
+        </ul>
+    </nav>
+    <button class="close-btn" id="close-btn">✕</button>
+
+    <div id="fade-overlay"></div>
 
     <video id="monitor-video" src="./Monitor_Screen_Vid.mp4" loop muted autoplay playsinline style="display:none"></video>
 

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design — Hikaru Shiozawa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./works.css" />
+</head>
+<body>
+    <header class="page-header">
+        <a href="./profile.html" class="name-link">
+            <span>Hikaru</span>
+            <span>Shiozawa</span>
+        </a>
+        <h1 class="page-title">Design</h1>
+        <div class="page-header-right">
+            <button class="burger-btn" id="burger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="works-content">
+        <div class="works-image-container">
+            <img id="works-main-image" src="" alt="" />
+            <button class="nav-arrow prev-arrow" id="prev-btn">
+                <svg width="64" height="45" viewBox="0 0 64 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M64 22.5L0 0V45L64 22.5Z" fill="#F0FBFF"/>
+                </svg>
+            </button>
+            <button class="nav-arrow next-arrow" id="next-btn">
+                <svg width="64" height="45" viewBox="0 0 64 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 22.5L64 0V45L0 22.5Z" fill="#F0FBFF"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="works-info">
+            <div class="works-type" id="works-type"></div>
+            <h2 class="works-title" id="works-title"></h2>
+            <p class="works-description" id="works-description"></p>
+            <div class="works-meta" id="works-meta"></div>
+            <div class="works-icons" id="works-icons"></div>
+        </div>
+    </div>
+
+    <script>
+    window.worksData = [
+        {
+            image: '',
+            type: 'Graphic Design',
+            title: 'Work Title',
+            description: 'Description of the work goes here.',
+            meta: '2024',
+            icons: []
+        }
+    ];
+    </script>
+    <script src="./works.js"></script>
+    <script src="./pages.js"></script>
+</body>
+</html>
