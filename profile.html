@@ -6,8 +6,9 @@
     <title>Profile — Hikaru Shiozawa</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./pages.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./pages.css">
+    <link rel="stylesheet" href="./profile.css">
 </head>
 <body>
     <header class="page-header">
@@ -16,15 +17,32 @@
             <span>Shiozawa</span>
         </a>
         <h1 class="page-title">Profile</h1>
-        <div class="page-header-right">
-            <button class="burger-btn" id="burger-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+        <button class="burger-btn" id="burger-btn" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
     </header>
-    <main class="page-body"></main>
+
+    <main class="page-body">
+        <div class="profile-content">
+            <img class="profile-photo" src="./Blender/01_Assets/Profile/photo.jpg" alt="Hikaru Shiozawa" />
+            <div class="profile-info">
+                <h2 class="profile-name">Hi, I'm Hikaru Shiozawa</h2>
+                <p class="profile-role">Digital Media Designer</p>
+                <p class="profile-bio">Focus on graphic design, motion graphics, and 3D with a passion for digital media and immersive visual storytelling — blending sharp design thinking with technical craft in Blender and the Adobe Suite.</p>
+                <div class="profile-toolkits">
+                    <p class="profile-toolkits-label">Toolkits:</p>
+                    <div class="profile-icons">
+                        <img src="./Blender/01_Assets/Web_Assets/Blender.png"       alt="Blender" />
+                        <img src="./Blender/01_Assets/Web_Assets/UnrealEngine.webp" alt="Unreal Engine" />
+                        <img src="./Blender/01_Assets/Web_Assets/Ae.png"            alt="After Effects" />
+                        <img src="./Blender/01_Assets/Web_Assets/Ai.png"            alt="Illustrator" />
+                        <img src="./Blender/01_Assets/Web_Assets/Ps.png"            alt="Photoshop" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
     <script src="./pages.js"></script>
 </body>
 </html>

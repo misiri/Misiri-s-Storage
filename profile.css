@@ -1,0 +1,86 @@
+/* ── Background ── */
+body {
+    background-image: url('./Pages_BG.png');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    height: 100vh;
+    color: #ffffff;
+}
+
+/* ── Override header text to white ── */
+.name-link       { color: #ffffff; }
+.page-title      { color: #ffffff; }
+.burger-btn span { background: #ffffff; }
+
+/* ── Page body: vertically center the content ── */
+.page-body {
+    height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    padding: 0 100px;
+}
+
+/* ── Two-column layout ── */
+.profile-content {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+/* ── Photo ── */
+.profile-photo {
+    width: 365px;
+    height: 365px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* ── Text block ── */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.profile-name {
+    font-size: 64px;
+    font-weight: 200;
+    line-height: 1.1;
+}
+
+.profile-role {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.profile-bio {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 560px;
+}
+
+/* ── Toolkits ── */
+.profile-toolkits {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-toolkits-label {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.profile-icons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.profile-icons img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
