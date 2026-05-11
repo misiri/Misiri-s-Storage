@@ -49,6 +49,7 @@ let controllerOriginalRotZ = 0;
 let previousHoverObject = '';
 
 let labelDelayTimer = null;
+let pointerDownTime = 0;
 
 const COOLDOWN = 5;
 
@@ -176,6 +177,7 @@ function startTransition(url) {
 }
 
 function onClick() {
+    if (performance.now() - pointerDownTime > 200) return;
     if (intersectObject === '01_Frame')      startTransition('design-works.html');
     if (intersectObject === '02_Monitor')    startTransition('motion-works.html');
     if (intersectObject === '03_Controller') startTransition('3d-works.html');
@@ -187,6 +189,7 @@ function onPointerMove(event) {
 }
 
 window.addEventListener("resize", onResize);
+window.addEventListener("pointerdown", () => { pointerDownTime = performance.now(); });
 window.addEventListener("click", onClick);
 window.addEventListener("pointermove", onPointerMove);
 
