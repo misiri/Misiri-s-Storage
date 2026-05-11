@@ -222,13 +222,14 @@ function animate() {
     if (intersectObject !== previousHoverObject) {
         const now = clock.getElapsedTime();
 
-        // Category label — show after 3s, hide immediately on hover exit
+        // Category label — show immediately, hide after 3s
         clearTimeout(labelDelayTimer);
         const label = categoryMap[intersectObject] || '';
         if (label && categoryLabelEl) {
+            categoryLabelEl.textContent = label;
+            categoryLabelEl.classList.add('visible');
             labelDelayTimer = setTimeout(() => {
-                categoryLabelEl.textContent = label;
-                categoryLabelEl.classList.add('visible');
+                categoryLabelEl.classList.remove('visible');
             }, 3000);
         } else if (categoryLabelEl) {
             categoryLabelEl.classList.remove('visible');
