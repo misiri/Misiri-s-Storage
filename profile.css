@@ -8,12 +8,12 @@ body {
     color: #ffffff;
 }
 
-/* ── Override header text to white ── */
+/* ── Header overrides (white text on background image) ── */
 .name-link       { color: #ffffff; }
 .page-title      { color: #ffffff; }
 .burger-btn span { background: #ffffff; }
 
-/* ── Page body: vertically center the content ── */
+/* ── Page body: fill remaining height, center content ── */
 .page-body {
     height: calc(100vh - 200px);
     display: flex;
@@ -21,7 +21,7 @@ body {
     padding: 0 100px;
 }
 
-/* ── Two-column layout ── */
+/* ── Side-by-side layout ── */
 .profile-content {
     display: flex;
     align-items: center;
