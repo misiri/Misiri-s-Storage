@@ -49,7 +49,7 @@ let controllerOriginalRotZ = 0;
 let previousHoverObject = '';
 
 let labelDelayTimer = null;
-let pointerDownTime = 0;
+let pointerDownPos = { x: 0, y: 0 };
 
 const COOLDOWN = 5;
 
@@ -176,8 +176,10 @@ function startTransition(url) {
     }, 1300);  // total time before page navigates
 }
 
-function onClick() {
-    if (performance.now() - pointerDownTime > 200) return;
+function onClick(e) {
+    const dx = e.clientX - pointerDownPos.x;
+    const dy = e.clientY - pointerDownPos.y;
+    if (Math.hypot(dx, dy) > 4) return; // dragged, not clicked
     if (intersectObject === '01_Frame')      startTransition('design-works.html');
     if (intersectObject === '02_Monitor')    startTransition('motion-works.html');
     if (intersectObject === '03_Controller') startTransition('3d-works.html');
@@ -189,7 +191,7 @@ function onPointerMove(event) {
 }
 
 window.addEventListener("resize", onResize);
-window.addEventListener("pointerdown", () => { pointerDownTime = performance.now(); });
+window.addEventListener("pointerdown", (e) => { pointerDownPos = { x: e.clientX, y: e.clientY }; });
 window.addEventListener("click", onClick);
 window.addEventListener("pointermove", onPointerMove);
 
