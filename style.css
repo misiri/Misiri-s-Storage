@@ -195,7 +195,8 @@ body {
     font-weight: 200;
 }
 
-.close-btn.open {
+.close-btn.open,
+.close-btn.visible {
     opacity: 1;
     pointer-events: auto;
 }
